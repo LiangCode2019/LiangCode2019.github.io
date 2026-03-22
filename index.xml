@@ -7,14 +7,66 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Wed, 18 Mar 2026 11:44:25 +0800</lastBuildDate><atom:link href="https://LiangCode2019.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>MyFirstBlog</title>
-        <link>https://LiangCode2019.github.io/p/myfirstblog/</link>
-        <pubDate>Wed, 18 Mar 2026 11:44:25 +0800</pubDate>
+        <lastBuildDate>Sun, 22 Mar 2026 21:46:19 +0800</lastBuildDate><atom:link href="https://LiangCode2019.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>LLM的训练原理</title>
+        <link>https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Sun, 22 Mar 2026 21:46:19 +0800</pubDate>
         
-        <guid>https://LiangCode2019.github.io/p/myfirstblog/</guid>
-        <description>&lt;h2 id=&#34;hello-world&#34;&gt;Hello World
-&lt;/h2&gt;</description>
+        <guid>https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;大模型是如何工作的&#34;&gt;大模型是如何工作的？
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;大模型作为一个文本补充器，工作原理如下，&lt;/p&gt;
+&lt;img src=&#34;index.assets/image-20260321191751690-1774187228494-1.png&#34; alt=&#34;image-20260321191751690&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;p&gt;user prompt:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A banana is&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;model response&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;an elongated,  edible fruit&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;大模型作为文档生成器，工作原理如下，&lt;/p&gt;
+&lt;img src=&#34;index.assets/image-20260321192408971-1774187228494-2.png&#34; alt=&#34;image-20260321192408971&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;p&gt;user prompt:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I want to buy a new car&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;model response:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What kind of car to do you want to buy?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们能够注意到上面两个模型的区别在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一个模型仅仅是作为文档的填充器来使用，根据前面已知的提示词去预测下一个最有可能出现的字符，然后将提示词和预测到的字符联合起来作为新的提示词再次传入模型中去预测下下一个最有可能出现的字符。这就是我们基于互联网数据进行训练的模型，它也被也被称为&lt;code&gt;Base Model&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二个模型是一个文档生成器模型，它可以根据提示问题生成更像人类的回答。这就是&lt;code&gt;ChatGPT&lt;/code&gt;模型。&lt;code&gt;ChatGPT&lt;/code&gt;是一个推理模型，它可以根据提示问题生成更像人类回答的内容。它在&lt;code&gt;Base Model&lt;/code&gt;的基础上，额外添加了两个训练步骤：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;微调步骤(&lt;strong&gt;fine-tuning&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;来自人类反馈中强化学习步骤（ &lt;strong&gt;reinforcement learning from human feedback&lt;/strong&gt;）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pre-training-base-model&#34;&gt;Pre-training: Base Model﻿
+&lt;/h3&gt;&lt;p&gt;这是构造人工智能革命的核心，也是人工智能真正魅力的所在。&lt;/p&gt;
+&lt;p&gt;预训练基础模型的过程就是将网络中的大量数据输入给模型，并让它自己去学习。&lt;/p&gt;
+&lt;p&gt;正如&lt;code&gt;GPT-3&lt;/code&gt;论文所说的，基础模型是在大量的互联网数据上训练的。这对像你我这样的普通人来说并非易事。它不仅需要获取数据，还需要强大的计算能力，例如 GPU 和 TPU。&lt;/p&gt;
+&lt;p&gt;不过别担心，我们仍然可以在自己的电脑上学习训练一个小型 &lt;code&gt;GPT&lt;/code&gt; 模型。我将在下一节中向您展示具体方法。&lt;/p&gt;
+&lt;p&gt;LLM训练背后的创新支出在于引入了Transformer架构，该架构使得模型能够从大量数据中学习，同时保留输入不同部分之间关键的上下文关系。&lt;/p&gt;
+&lt;p&gt;通过维护这些关联，该模型能够根据所提供的上下文（无论是单个词语、句子、段落还是更广泛的内容）有效的推断出新的见解。凭借这种能力，LLM训练为自然语言处理和生成任务开辟了新的机遇，使机器学习能够更好地理解和回应人类交流。&lt;/p&gt;
+&lt;p&gt;用于训练基础模型的Transformer架构如下图所示：&lt;/p&gt;
+&lt;img src=&#34;index.assets/image-20260322213632456-1774187228494-3.png&#34; alt=&#34;image-20260322213632456&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;p&gt;这是一个基于神经网络的模型训练，采用了一些新的和旧的技术相结合，包括：&lt;code&gt;tokenization&lt;/code&gt;, &lt;code&gt;embedding&lt;/code&gt;, &lt;code&gt;position encoding&lt;/code&gt;, &lt;code&gt;feed-forward&lt;/code&gt;，&lt;code&gt;normalization&lt;/code&gt;，&lt;code&gt;softmax&lt;/code&gt;，&lt;code&gt;linear transformation&lt;/code&gt;以及最为重要的是&lt;code&gt;multi-head attention&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;这是技术部分的内容都是你我双方非常感兴趣的。我们希望能清楚地理解这一架构背后的理念，以及具体的训练过程究竟是如何进行的。因此接下来的主题是，我么将深入研读相关论文、代码以及用于训练基础模型的数学原理。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>Archives</title>

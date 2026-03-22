@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Hello World ">
-<title>MyFirstBlog</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: A banana is model response an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: I want to buy a new car model response:">
+<title>LLM的训练原理</title>
 
-<link rel='canonical' href='https://LiangCode2019.github.io/p/myfirstblog/'>
+<link rel='canonical' href='https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="MyFirstBlog">
-<meta property='og:description' content="Hello World ">
-<meta property='og:url' content='https://LiangCode2019.github.io/p/myfirstblog/'>
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="LLM的训练原理">
+<meta property='og:description' content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: A banana is model response an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: I want to buy a new car model response:">
+<meta property='og:url' content='https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/'>
 <meta property='og:site_name' content='LiangBlog2019'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-18T11:44:25&#43;08:00'/><meta property='article:modified_time' content='2026-03-18T11:44:25&#43;08:00'/>
-<meta name="twitter:title" content="MyFirstBlog">
-<meta name="twitter:description" content="Hello World ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-22T21:46:19&#43;08:00'/><meta property='article:modified_time' content='2026-03-22T21:46:19&#43;08:00'/>
+<meta name="twitter:title" content="LLM的训练原理">
+<meta name="twitter:description" content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: A banana is model response an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: I want to buy a new car model response:">
   
 
 
@@ -299,7 +299,12 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#hello-world">Hello World</a></li>
+    <li>
+      <ol>
+        <li><a href="#大模型是如何工作的">大模型是如何工作的？</a></li>
+        <li><a href="#pre-training-base-model">Pre-training: Base Model﻿</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -319,7 +324,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/myfirstblog/">MyFirstBlog</a>
+            <a href="/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/">LLM的训练原理</a>
         </h2>
     
         
@@ -341,7 +346,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Mar 18, 2026</time>
+                <time class="article-time--published">Mar 22, 2026</time>
             </div>
         
 
@@ -357,8 +362,60 @@
     <section class="article-content">
     
     
-    <h2 id="hello-world">Hello World
-</h2>
+    <h3 id="大模型是如何工作的">大模型是如何工作的？
+</h3><ol>
+<li>
+<p>大模型作为一个文本补充器，工作原理如下，</p>
+<img src="index.assets/image-20260321191751690-1774187228494-1.png" alt="image-20260321191751690" style="zoom:67%;" />
+<p>user prompt:</p>
+<blockquote>
+<p>A banana is</p>
+</blockquote>
+<p>model response</p>
+<blockquote>
+<p>an elongated,  edible fruit</p>
+</blockquote>
+</li>
+<li>
+<p>大模型作为文档生成器，工作原理如下，</p>
+<img src="index.assets/image-20260321192408971-1774187228494-2.png" alt="image-20260321192408971" style="zoom:67%;" />
+<p>user prompt:</p>
+<blockquote>
+<p>I want to buy a new car</p>
+</blockquote>
+<p>model response:</p>
+<blockquote>
+<p>What kind of car to do you want to buy?</p>
+</blockquote>
+</li>
+</ol>
+<p>我们能够注意到上面两个模型的区别在于：</p>
+<ul>
+<li>
+<p>第一个模型仅仅是作为文档的填充器来使用，根据前面已知的提示词去预测下一个最有可能出现的字符，然后将提示词和预测到的字符联合起来作为新的提示词再次传入模型中去预测下下一个最有可能出现的字符。这就是我们基于互联网数据进行训练的模型，它也被也被称为<code>Base Model</code>。</p>
+</li>
+<li>
+<p>第二个模型是一个文档生成器模型，它可以根据提示问题生成更像人类的回答。这就是<code>ChatGPT</code>模型。<code>ChatGPT</code>是一个推理模型，它可以根据提示问题生成更像人类回答的内容。它在<code>Base Model</code>的基础上，额外添加了两个训练步骤：</p>
+<blockquote>
+<ol>
+<li>微调步骤(<strong>fine-tuning</strong>)</li>
+<li>来自人类反馈中强化学习步骤（ <strong>reinforcement learning from human feedback</strong>）</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h3 id="pre-training-base-model">Pre-training: Base Model﻿
+</h3><p>这是构造人工智能革命的核心，也是人工智能真正魅力的所在。</p>
+<p>预训练基础模型的过程就是将网络中的大量数据输入给模型，并让它自己去学习。</p>
+<p>正如<code>GPT-3</code>论文所说的，基础模型是在大量的互联网数据上训练的。这对像你我这样的普通人来说并非易事。它不仅需要获取数据，还需要强大的计算能力，例如 GPU 和 TPU。</p>
+<p>不过别担心，我们仍然可以在自己的电脑上学习训练一个小型 <code>GPT</code> 模型。我将在下一节中向您展示具体方法。</p>
+<p>LLM训练背后的创新支出在于引入了Transformer架构，该架构使得模型能够从大量数据中学习，同时保留输入不同部分之间关键的上下文关系。</p>
+<p>通过维护这些关联，该模型能够根据所提供的上下文（无论是单个词语、句子、段落还是更广泛的内容）有效的推断出新的见解。凭借这种能力，LLM训练为自然语言处理和生成任务开辟了新的机遇，使机器学习能够更好地理解和回应人类交流。</p>
+<p>用于训练基础模型的Transformer架构如下图所示：</p>
+<img src="index.assets/image-20260322213632456-1774187228494-3.png" alt="image-20260322213632456" style="zoom:80%;" />
+<p>这是一个基于神经网络的模型训练，采用了一些新的和旧的技术相结合，包括：<code>tokenization</code>, <code>embedding</code>, <code>position encoding</code>, <code>feed-forward</code>，<code>normalization</code>，<code>softmax</code>，<code>linear transformation</code>以及最为重要的是<code>multi-head attention</code>。</p>
+<p>这是技术部分的内容都是你我双方非常感兴趣的。我们希望能清楚地理解这一架构背后的理念，以及具体的训练过程究竟是如何进行的。因此接下来的主题是，我么将深入研读相关论文、代码以及用于训练基础模型的数学原理。</p>
+
 </section>
 
 
