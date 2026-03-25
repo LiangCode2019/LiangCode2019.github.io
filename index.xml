@@ -13,8 +13,8 @@
         <pubDate>Sun, 22 Mar 2026 21:46:19 +0800</pubDate>
         
         <guid>https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/</guid>
-        <description>&lt;h3 id=&#34;大模型是如何工作的&#34;&gt;大模型是如何工作的？
-&lt;/h3&gt;&lt;ol&gt;
+        <description>&lt;h1 id=&#34;大模型是如何工作的&#34;&gt;大模型是如何工作的？
+&lt;/h1&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;大模型作为一个文本补充器，工作原理如下，&lt;/p&gt;
 &lt;img src=&#34;index.assets/image-20260321191751690-1774187228494-1.png&#34; alt=&#34;image-20260321191751690&#34; style=&#34;zoom:67%;&#34; /&gt;
@@ -55,8 +55,8 @@
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;pre-training-base-model&#34;&gt;Pre-training: Base Model﻿
-&lt;/h3&gt;&lt;p&gt;这是构造人工智能革命的核心，也是人工智能真正魅力的所在。&lt;/p&gt;
+&lt;h1 id=&#34;pre-training-base-model&#34;&gt;Pre-training: Base Model﻿
+&lt;/h1&gt;&lt;p&gt;这是构造人工智能革命的核心，也是人工智能真正魅力的所在。&lt;/p&gt;
 &lt;p&gt;预训练基础模型的过程就是将网络中的大量数据输入给模型，并让它自己去学习。&lt;/p&gt;
 &lt;p&gt;正如&lt;code&gt;GPT-3&lt;/code&gt;论文所说的，基础模型是在大量的互联网数据上训练的。这对像你我这样的普通人来说并非易事。它不仅需要获取数据，还需要强大的计算能力，例如 GPU 和 TPU。&lt;/p&gt;
 &lt;p&gt;不过别担心，我们仍然可以在自己的电脑上学习训练一个小型 &lt;code&gt;GPT&lt;/code&gt; 模型。我将在下一节中向您展示具体方法。&lt;/p&gt;
@@ -66,6 +66,114 @@
 &lt;img src=&#34;index.assets/image-20260322213632456-1774187228494-3.png&#34; alt=&#34;image-20260322213632456&#34; style=&#34;zoom:80%;&#34; /&gt;
 &lt;p&gt;这是一个基于神经网络的模型训练，采用了一些新的和旧的技术相结合，包括：&lt;code&gt;tokenization&lt;/code&gt;, &lt;code&gt;embedding&lt;/code&gt;, &lt;code&gt;position encoding&lt;/code&gt;, &lt;code&gt;feed-forward&lt;/code&gt;，&lt;code&gt;normalization&lt;/code&gt;，&lt;code&gt;softmax&lt;/code&gt;，&lt;code&gt;linear transformation&lt;/code&gt;以及最为重要的是&lt;code&gt;multi-head attention&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;这是技术部分的内容都是你我双方非常感兴趣的。我们希望能清楚地理解这一架构背后的理念，以及具体的训练过程究竟是如何进行的。因此接下来的主题是，我么将深入研读相关论文、代码以及用于训练基础模型的数学原理。&lt;/p&gt;
+&lt;h1 id=&#34;fine-tuning-train-the-assistant&#34;&gt;Fine-tuning: Train the Assistant﻿
+&lt;/h1&gt;&lt;p&gt;微调方法最初是由OpenAI提出并实现的。这个方法非常简单，但是十分的有效:通过雇佣人工标注员创建大量的问答对话（如10万个问答对话），然后将这些问答对话输入给模型，让它从中学习。&lt;/p&gt;
+&lt;p&gt;该过程叫做&lt;strong&gt;微调&lt;/strong&gt;，或许更常见的是其英文表达 &lt;strong&gt;fine-tuning&lt;/strong&gt;。当模型训练完这10万个问答对话后，对于人类提出的问题，模型就会开始向人一样作出回应！&lt;/p&gt;
+&lt;p&gt;让我们来举一些带有标签的实例对话：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Human labeled Q&amp;amp;A&lt;/p&gt;
+&lt;p&gt;Q1: What is your name?&lt;/p&gt;
+&lt;p&gt;A1: My name is John.&lt;/p&gt;
+&lt;p&gt;Q2: What&amp;rsquo;s the capital of China?&lt;/p&gt;
+&lt;p&gt;A2: China&amp;rsquo;s capital is Beijing.&lt;/p&gt;
+&lt;p&gt;Q3: Summarize the plot of the movie Titanic.&lt;/p&gt;
+&lt;p&gt;A3: The movie Titanic is about a ship that sinks in the ocean.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通过训练模型掌握这些响应风格，相关上下文响应的概率将大大提高，从而能够更好地回应用户的提示。通过训练模型掌握各种对话风格，我们提高了模型对提示提供相关且符合上下文的响应的可能性。&lt;/p&gt;
+&lt;p&gt;这就是语言模型能够显得如此智能和像人类一样的原因；通过学习模仿现实世界对话的节奏和模式，它们可以逼真地模拟与用户的来回对话。&lt;/p&gt;
+&lt;p&gt;至此，我们可以说我们得到了一个&lt;strong&gt;模型助手(Assistant Model)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;下图展示了从基础模型预训练到辅助模型微调的一些关键步骤：&lt;/p&gt;
+&lt;img src=&#34;index.assets/image-20260325204725360.png&#34; alt=&#34;image-20260325204725360&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;p&gt;(引用自 &lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=kCc8FmEb1nY&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Andrej Karpathy&amp;rsquo;s build a GPT model from scratch)&lt;/a&gt;)&lt;/p&gt;
+&lt;h1 id=&#34;rlhf-基于人类的反馈进行强化学习&#34;&gt;RLHF: 基于人类的反馈进行强化学习
+&lt;/h1&gt;&lt;p&gt;2022年1月，OpenAI发布了关于&lt;a class=&#34;link&#34; href=&#34;https://openai.com/research/instruction-following&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;“对齐语言模型以遵循指令”&lt;/a&gt;的研究成果。在他们的博客文章中，他们描述了如何利用人类反馈进一步微调模型：&lt;/p&gt;
+&lt;img src=&#34;index.assets/image-20260325204535542.png&#34; alt=&#34;image-20260325204535542&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;p&gt;这个方法有点复杂。其思路是让模型从人类反馈中学习。他们不提供大约 10 万个带标签的问答对，而是收集用户的提问和模型的回答，然后让人类对它们进行排序。将排序后的对话作为最理想的问答样本，再次输入模型，让模型从中学习，从而提升其整体性能。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://openai.com/research/instruction-following&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OpenAI在其博客&lt;/a&gt;上介绍了这一过程：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为了使我们的模型更安全、更实用、更符合用户需求，我们采用了一种名为“基于人类反馈的强化学习”（RLHF）的现有技术。客户通过 API 提交提示后，我们的标注员会演示模型应有的行为，并对模型的多个输出结果进行排序。然后，我们利用这些数据来微调 GPT-3 模型。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以下是基础模型与精细调校/RLHF响应的对比：&lt;/p&gt;
+&lt;img src=&#34;index.assets/image-20260325205212604.png&#34; alt=&#34;image-20260325205212604&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;p&gt;可以看出，如果没有微调和 RLHF，该模型只是一个文档补全器。&lt;/p&gt;
+&lt;h1 id=&#34;提示词工程&#34;&gt;提示词工程
+&lt;/h1&gt;&lt;p&gt;或许我们在日常表达时更愿意称之为 &lt;strong&gt;Prompt Engineering&lt;/strong&gt;﻿ 。&lt;/p&gt;
+&lt;p&gt;即使经过微调和RLHF优化，该模型仍然需要一些辅助才能获得理想的响应。而这正是发挥 &lt;strong&gt;Prompt Engineering&lt;/strong&gt;﻿作用的地方。&lt;/p&gt;
+&lt;p&gt;简单来说，我们可以精心设计提示，从而从模型中获得所需的响应（有时甚至无需微调）。&lt;/p&gt;
+&lt;p&gt;如果你不想过多地钻研数学和代码，那么&lt;strong&gt;Prompt Engineering&lt;/strong&gt;﻿就是一个让你更加专注的好方法，因为它可以通过输入更好的提示来充分发挥 LLM 模型的优势。&lt;/p&gt;
+&lt;p&gt;现在我们来看一个例子：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;prompt:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The sky is&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;output:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;blue.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们来尝试改进一下&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;prompt:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Complete the sentence:&lt;/p&gt;
+&lt;p&gt;The sky is&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;output:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;blue during the day and dark at night.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通过在提示中加入一些指令，模型就会知道该做什么以及该如何回应。&lt;/p&gt;
+&lt;p&gt;我们来看另一个有趣的例子：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;prompt:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When I was 6 my sister was half my age. Now I’m 70 how old is my sister?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;output:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;35&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们发现这个答案明显是错误的，正确答案应该输出67。模型似乎理解了问题，但它引用了数学计算而不是逻辑推理。&lt;/p&gt;
+&lt;p&gt;无需进行微调和RLHF，我们只需在提示符中添加更多示例指令即可得到正确答案：&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;prompt:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today? A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6.&lt;/p&gt;
+&lt;p&gt;Q: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?&lt;/p&gt;
+&lt;p&gt;A: There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5.&lt;/p&gt;
+&lt;p&gt;Q: Leah had 32 chocolates and her sister had 42. If they ate 35, how many pieces do they have left in total?&lt;/p&gt;
+&lt;p&gt;A: Leah had 32 chocolates and Leah’s sister had 42. That means there were originally 32 + 42 = 74 chocolates. 35 have been eaten. So in total they still have 74 - 35 = 39 chocolates. The answer is 39.&lt;/p&gt;
+&lt;p&gt;Q: Jason had 20 lollipops. He gave Denny some lollipops. Now Jason has 12 lollipops. How many lollipops did Jason give to Denny?&lt;/p&gt;
+&lt;p&gt;A: Jason had 20 lollipops. Since he only has 12 now, he must have given the rest to Denny. The number of lollipops he has given to Denny must have been 20 - 12 = 8 lollipops. The answer is 8.&lt;/p&gt;
+&lt;p&gt;Q: Shawn has five toys. For Christmas, he got two toys each from his mom and dad. How many toys does he have now?&lt;/p&gt;
+&lt;p&gt;A: He has 5 toys. He got 2 from mom, so after that he has 5 + 2 = 7 toys. Then he got 2 more from dad, so in total he has 7 + 2 = 9 toys. The answer is 9.&lt;/p&gt;
+&lt;p&gt;Q: There were nine computers in the server room. Five more computers were installed each day, from monday to thursday. How many computers are now in the server room?&lt;/p&gt;
+&lt;p&gt;A: There are 4 days from monday to thursday. 5 computers were added each day. That means in total 4 * 5 = 20 computers were added. There were 9 computers in the beginning, so now there are 9 + 20 = 29 computers. The answer is 29.&lt;/p&gt;
+&lt;p&gt;Q: Michael had 58 golf balls. On tuesday, he lost 23 golf balls. On wednesday, he lost 2 more. How many golf balls did he have at the end of wednesday?&lt;/p&gt;
+&lt;p&gt;A: Michael initially had 58 balls. He lost 23 on Tuesday, so after that he has 58 - 23 = 35 balls. On Wednesday he lost 2 more so now he has 35 - 2 = 33 balls. The answer is 33.&lt;/p&gt;
+&lt;p&gt;Q: Olivia has $23. She bought five bagels for $3 each. How much money does she have left?&lt;/p&gt;
+&lt;p&gt;A: She bought 5 bagels for $3 each. This means she spent $15. She has $8 left.&lt;/p&gt;
+&lt;p&gt;Q: When I was 6 my sister was half my age. Now I’m 70 how old is my sister?&lt;/p&gt;
+&lt;p&gt;A:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;output:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When I was 6 my sister was half my age, so she was 3. Now I am 70, so she is 70 - 3 = 67. The answer is 67.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;output 2 :&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When the narrator was 6, his sister was half his age, which is 3. Now that the narrator is 70, his sister would be 70 - 3 = 67 years old. The answer is 67.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;两个答案都正确！我们只需在提示中添加一些例子作为逻辑解释，然后再次提出同样的问题。现在模型就能理解问题并正确回答了。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;上述示例由[Wang 等人 (2022)](&lt;a class=&#34;link&#34; href=&#34;https://www.promptingguide.ai/techniques/consistency#:~:text=Wang&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.promptingguide.ai/techniques/consistency#:~:text=Wang&lt;/a&gt; et al,a new tab)提出，计算最终答案涉及几个步骤。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;强有力的提示可以引导模型执行复杂的任务，例如解决数学问题或概括文本。因此，它&lt;code&gt;prompt engineering&lt;/code&gt;在LLM生态系统中也扮演着非常重要的角色。&lt;/p&gt;
+&lt;p&gt;想了解更多关于提示工程的知识，这里有一篇不错的&lt;a class=&#34;link&#34; href=&#34;https://www.promptingguide.ai/introduction/basics&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;提示指南&lt;/a&gt;教程。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;学习笔记说明&lt;/strong&gt;： 本文为个人学习大模型（LLM）过程中的心得笔记。内容深受 &lt;a class=&#34;link&#34; href=&#34;https://space.bilibili.com/3546611527453161?spm_id_from=333.337.0.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;B 站&lt;strong&gt;张老师&lt;/strong&gt;&lt;/a&gt;相关课程的启发，在此对张老师提供的优质教学资源表示衷心感谢。如果你也对 LLM 感兴趣，强烈推荐关注张老师的 B 站频道，其内容对初学者极其友好。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;“我们不生产知识，我们只是知识的搬运工与思考者。”&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;版权声明&lt;/strong&gt;：本笔记仅供个人学习交流使用。如有内容涉及侵权或引用不当，&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/user/2728316429416986&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;请联系我&lt;/a&gt;，我将第一时间进行核实并删除相关博文。感谢理解！&lt;/p&gt;
 </description>
         </item>
         <item>
