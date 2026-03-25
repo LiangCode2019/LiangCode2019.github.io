@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: A banana is model response an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: I want to buy a new car model response:">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: 1 A banana is model response 1 an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: 1 I want to buy a new">
 <title>LLM的训练原理</title>
 
 <link rel='canonical' href='https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/'>
 
 <link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="LLM的训练原理">
-<meta property='og:description' content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: A banana is model response an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: I want to buy a new car model response:">
+<meta property='og:description' content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: 1 A banana is model response 1 an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: 1 I want to buy a new">
 <meta property='og:url' content='https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/'>
 <meta property='og:site_name' content='LiangBlog2019'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-03-22T21:46:19&#43;08:00'/><meta property='article:modified_time' content='2026-03-22T21:46:19&#43;08:00'/>
 <meta name="twitter:title" content="LLM的训练原理">
-<meta name="twitter:description" content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: A banana is model response an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: I want to buy a new car model response:">
+<meta name="twitter:description" content="大模型是如何工作的？ 大模型作为一个文本补充器，工作原理如下， user prompt: 1 A banana is model response 1 an elongated, edible fruit 大模型作为文档生成器，工作原理如下， user prompt: 1 I want to buy a new">
   
 
 
@@ -332,26 +332,46 @@
 <p>大模型作为一个文本补充器，工作原理如下，</p>
 <img src="index.assets/image-20260321191751690-1774187228494-1.png" alt="image-20260321191751690" style="zoom:67%;" />
 <p>user prompt:</p>
-<blockquote>
-<p>A banana is</p>
-</blockquote>
-<p>model response</p>
-<blockquote>
-<p>an elongated,  edible fruit</p>
-</blockquote>
-</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">A banana is
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>model response</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">an elongated,  edible fruit
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>大模型作为文档生成器，工作原理如下，</p>
 <img src="index.assets/image-20260321192408971-1774187228494-2.png" alt="image-20260321192408971" style="zoom:67%;" />
 <p>user prompt:</p>
-<blockquote>
-<p>I want to buy a new car</p>
-</blockquote>
-<p>model response:</p>
-<blockquote>
-<p>What kind of car to do you want to buy?</p>
-</blockquote>
-</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">I want to buy a new car
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>model response:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">What kind of car to do you want to buy?
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ol>
 <p>我们能够注意到上面两个模型的区别在于：</p>
 <ul>
@@ -360,13 +380,17 @@
 </li>
 <li>
 <p>第二个模型是一个文档生成器模型，它可以根据提示问题生成更像人类的回答。这就是<code>ChatGPT</code>模型。<code>ChatGPT</code>是一个推理模型，它可以根据提示问题生成更像人类回答的内容。它在<code>Base Model</code>的基础上，额外添加了两个训练步骤：</p>
-<blockquote>
-<ol>
-<li>微调步骤(<strong>fine-tuning</strong>)</li>
-<li>来自人类反馈中强化学习步骤（ <strong>reinforcement learning from human feedback</strong>）</li>
-</ol>
-</blockquote>
-</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="k">1.</span> 微调步骤(fine-tuning)
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 来自人类反馈中强化学习步骤（reinforcement learning from human feedback
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 <h1 id="pre-training-base-model">Pre-training: Base Model﻿
 </h1><p>这是构造人工智能革命的核心，也是人工智能真正魅力的所在。</p>
@@ -383,16 +407,39 @@
 </h1><p>微调方法最初是由OpenAI提出并实现的。这个方法非常简单，但是十分的有效:通过雇佣人工标注员创建大量的问答对话（如10万个问答对话），然后将这些问答对话输入给模型，让它从中学习。</p>
 <p>该过程叫做<strong>微调</strong>，或许更常见的是其英文表达 <strong>fine-tuning</strong>。当模型训练完这10万个问答对话后，对于人类提出的问题，模型就会开始向人一样作出回应！</p>
 <p>让我们来举一些带有标签的实例对话：</p>
-<blockquote>
-<p>Human labeled Q&amp;A</p>
-<p>Q1: What is your name?</p>
-<p>A1: My name is John.</p>
-<p>Q2: What&rsquo;s the capital of China?</p>
-<p>A2: China&rsquo;s capital is Beijing.</p>
-<p>Q3: Summarize the plot of the movie Titanic.</p>
-<p>A3: The movie Titanic is about a ship that sinks in the ocean.</p>
-</blockquote>
-<p>通过训练模型掌握这些响应风格，相关上下文响应的概率将大大提高，从而能够更好地回应用户的提示。通过训练模型掌握各种对话风格，我们提高了模型对提示提供相关且符合上下文的响应的可能性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">Human labeled Q<span class="err">&amp;</span>A
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q1: What is your name?
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A1: My name is John.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q2: What&#39;s the capital of China?
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A2: China&#39;s capital is Beijing.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q3: Summarize the plot of the movie Titanic.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A3: The movie Titanic is about a ship that sinks in the ocean.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过训练模型掌握这些响应风格，相关上下文响应的概率将大大提高，从而能够更好地回应用户的提示。通过训练模型掌握各种对话风格，我们提高了模型对提示提供相关且符合上下文的响应的可能性。</p>
 <p>这就是语言模型能够显得如此智能和像人类一样的原因；通过学习模仿现实世界对话的节奏和模式，它们可以逼真地模拟与用户的来回对话。</p>
 <p>至此，我们可以说我们得到了一个<strong>模型助手(Assistant Model)</strong></p>
 <p>下图展示了从基础模型预训练到辅助模型微调的一些关键步骤：</p>
@@ -419,66 +466,164 @@
 <p>如果你不想过多地钻研数学和代码，那么<strong>Prompt Engineering</strong>﻿就是一个让你更加专注的好方法，因为它可以通过输入更好的提示来充分发挥 LLM 模型的优势。</p>
 <p>现在我们来看一个例子：</p>
 <p><em>prompt:</em></p>
-<blockquote>
-<p>The sky is</p>
-</blockquote>
-<p><em>output:</em></p>
-<blockquote>
-<p>blue.</p>
-</blockquote>
-<p>我们来尝试改进一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">The sky is
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>output:</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">blue.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们来尝试改进一下</p>
 <p><em>prompt:</em></p>
-<blockquote>
-<p>Complete the sentence:</p>
-<p>The sky is</p>
-</blockquote>
-<p><em>output:</em></p>
-<blockquote>
-<p>blue during the day and dark at night.</p>
-</blockquote>
-<p>通过在提示中加入一些指令，模型就会知道该做什么以及该如何回应。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">Complete the sentence:
+</span></span><span class="line"><span class="cl">The sky is
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>output:</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">blue during the day and dark at night.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过在提示中加入一些指令，模型就会知道该做什么以及该如何回应。</p>
 <p>我们来看另一个有趣的例子：</p>
 <p><em>prompt:</em></p>
-<blockquote>
-<p>When I was 6 my sister was half my age. Now I’m 70 how old is my sister?</p>
-</blockquote>
-<p><em>output:</em></p>
-<blockquote>
-<p>35</p>
-</blockquote>
-<p>我们发现这个答案明显是错误的，正确答案应该输出67。模型似乎理解了问题，但它引用了数学计算而不是逻辑推理。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">When I was 6 my sister was half my age. Now I’m 70 how old is my sister?
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>output:</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">35
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们发现这个答案明显是错误的，正确答案应该输出67。模型似乎理解了问题，但它引用了数学计算而不是逻辑推理。</p>
 <p>无需进行微调和RLHF，我们只需在提示符中添加更多示例指令即可得到正确答案：</p>
 <p><em>prompt:</em></p>
-<blockquote>
-<p>Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today? A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6.</p>
-<p>Q: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?</p>
-<p>A: There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5.</p>
-<p>Q: Leah had 32 chocolates and her sister had 42. If they ate 35, how many pieces do they have left in total?</p>
-<p>A: Leah had 32 chocolates and Leah’s sister had 42. That means there were originally 32 + 42 = 74 chocolates. 35 have been eaten. So in total they still have 74 - 35 = 39 chocolates. The answer is 39.</p>
-<p>Q: Jason had 20 lollipops. He gave Denny some lollipops. Now Jason has 12 lollipops. How many lollipops did Jason give to Denny?</p>
-<p>A: Jason had 20 lollipops. Since he only has 12 now, he must have given the rest to Denny. The number of lollipops he has given to Denny must have been 20 - 12 = 8 lollipops. The answer is 8.</p>
-<p>Q: Shawn has five toys. For Christmas, he got two toys each from his mom and dad. How many toys does he have now?</p>
-<p>A: He has 5 toys. He got 2 from mom, so after that he has 5 + 2 = 7 toys. Then he got 2 more from dad, so in total he has 7 + 2 = 9 toys. The answer is 9.</p>
-<p>Q: There were nine computers in the server room. Five more computers were installed each day, from monday to thursday. How many computers are now in the server room?</p>
-<p>A: There are 4 days from monday to thursday. 5 computers were added each day. That means in total 4 * 5 = 20 computers were added. There were 9 computers in the beginning, so now there are 9 + 20 = 29 computers. The answer is 29.</p>
-<p>Q: Michael had 58 golf balls. On tuesday, he lost 23 golf balls. On wednesday, he lost 2 more. How many golf balls did he have at the end of wednesday?</p>
-<p>A: Michael initially had 58 balls. He lost 23 on Tuesday, so after that he has 58 - 23 = 35 balls. On Wednesday he lost 2 more so now he has 35 - 2 = 33 balls. The answer is 33.</p>
-<p>Q: Olivia has $23. She bought five bagels for $3 each. How much money does she have left?</p>
-<p>A: She bought 5 bagels for $3 each. This means she spent $15. She has $8 left.</p>
-<p>Q: When I was 6 my sister was half my age. Now I’m 70 how old is my sister?</p>
-<p>A:</p>
-</blockquote>
-<p><em>output:</em></p>
-<blockquote>
-<p>When I was 6 my sister was half my age, so she was 3. Now I am 70, so she is 70 - 3 = 67. The answer is 67.</p>
-</blockquote>
-<p><em>output 2 :</em></p>
-<blockquote>
-<p>When the narrator was 6, his sister was half his age, which is 3. Now that the narrator is 70, his sister would be 70 - 3 = 67 years old. The answer is 67.</p>
-</blockquote>
-<p>两个答案都正确！我们只需在提示中添加一些例子作为逻辑解释，然后再次提出同样的问题。现在模型就能理解问题并正确回答了。</p>
-<p><em>上述示例由[Wang 等人 (2022)](<a class="link" href="https://www.promptingguide.ai/techniques/consistency#:~:text=Wang"  target="_blank" rel="noopener"
-    >https://www.promptingguide.ai/techniques/consistency#:~:text=Wang</a> et al,a new tab)提出，计算最终答案涉及几个步骤。</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: Leah had 32 chocolates and her sister had 42. If they ate 35, how many pieces do they have left in total? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: Leah had 32 chocolates and Leah’s sister had 42. That means there were originally 32 + 42 = 74 chocolates. 35 have been eaten. So in total they still have 74 - 35 = 39 chocolates. The answer is 39. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: Jason had 20 lollipops. He gave Denny some lollipops. Now Jason has 12 lollipops. How many lollipops did Jason give to Denny? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: Jason had 20 lollipops. Since he only has 12 now, he must have given the rest to Denny. The number of lollipops he has given to Denny must have been 20 - 12 = 8 lollipops. The answer is 8. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: Shawn has five toys. For Christmas, he got two toys each from his mom and dad. How many toys does he have now?
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: He has 5 toys. He got 2 from mom, so after that he has 5 + 2 = 7 toys. Then he got 2 more from dad, so in total he has 7 + 2 = 9 toys. The answer is 9. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: There were nine computers in the server room. Five more computers were installed each day, from monday to thursday. How many computers are now in the server room? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: There are 4 days from monday to thursday. 5 computers were added each day. That means in total 4 * 5 = 20 computers were added. There were 9 computers in the beginning, so now there are 9 + 20 = 29 computers. The answer is 29. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: Michael had 58 golf balls. On tuesday, he lost 23 golf balls. On wednesday, he lost 2 more. How many golf balls did he have at the end of wednesday? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: Michael initially had 58 balls. He lost 23 on Tuesday, so after that he has 58 - 23 = 35 balls. On Wednesday he lost 2 more so now he has 35 - 2 = 33 balls. The answer is 33. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: Olivia has $23. She bought five bagels for $3 each. How much money does she have left? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A: She bought 5 bagels for $3 each. This means she spent $15. She has $8 left. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Q: When I was 6 my sister was half my age. Now I’m 70 how old is my sister? 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A:
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>output:</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">When I was 6 my sister was half my age, so she was 3. Now I am 70, so she is 70 - 3 = 67. The answer is 67.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>output 2 :</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">When the narrator was 6, his sister was half his age, which is 3. Now that the narrator is 70, his sister would be 70 - 3 = 67 years old. The answer is 67.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>两个答案都正确！我们只需在提示中添加一些例子作为逻辑解释，然后再次提出同样的问题。现在模型就能理解问题并正确回答了。</p>
+<p><em>上述示例由<a class="link" href="https://www.promptingguide.ai/techniques/consistency"  target="_blank" rel="noopener"
+    >Wang 等人 (2022)</a>提出，计算最终答案涉及几个步骤。</em></p>
 <p>强有力的提示可以引导模型执行复杂的任务，例如解决数学问题或概括文本。因此，它<code>prompt engineering</code>在LLM生态系统中也扮演着非常重要的角色。</p>
 <p>想了解更多关于提示工程的知识，这里有一篇不错的<a class="link" href="https://www.promptingguide.ai/introduction/basics"  target="_blank" rel="noopener"
     >提示指南</a>教程。</p>
