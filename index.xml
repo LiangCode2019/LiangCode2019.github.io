@@ -7,7 +7,95 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Sun, 22 Mar 2026 21:46:19 +0800</lastBuildDate><atom:link href="https://LiangCode2019.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 09 Apr 2026 14:47:51 +0800</lastBuildDate><atom:link href="https://LiangCode2019.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Docker云服务器部署</title>
+        <link>https://LiangCode2019.github.io/p/docker%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
+        <pubDate>Thu, 09 Apr 2026 14:47:51 +0800</pubDate>
+        
+        <guid>https://LiangCode2019.github.io/p/docker%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>KV_cache</title>
+        <link>https://LiangCode2019.github.io/p/kv_cache/</link>
+        <pubDate>Thu, 09 Apr 2026 14:45:56 +0800</pubDate>
+        
+        <guid>https://LiangCode2019.github.io/p/kv_cache/</guid>
+        <description>&lt;h2 id=&#34;导言&#34;&gt;导言
+&lt;/h2&gt;&lt;img src=&#34;index.assets/image-20260409150601887.png&#34; alt=&#34;image-20260409150601887&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;KV cache 主要用于推理节点，此时的K和v的值是不变的&lt;/li&gt;
+&lt;li&gt;KV cache 只存在于 Decoder 解码器当中&lt;/li&gt;
+&lt;li&gt;目的： 为了加速 Q@K@V 的两次矩阵相乘的速度 （积极的）&lt;/li&gt;
+&lt;li&gt;KV cache 会加大内存占用（消极的）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;案例&#34;&gt;案例
+&lt;/h2&gt;&lt;p&gt;我们以文本 “中华人民共和国成立于1949年”为例，假设用户输入给大模型的文本为“中华人民”，模型的推理过程如下，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409153838490.png&#34;
+	width=&#34;2871&#34;
+	height=&#34;1324&#34;
+	srcset=&#34;https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409153838490_hu15373081505978292917.png 480w, https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409153838490_hu10989555333010164677.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260409153838490&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;216&#34;
+		data-flex-basis=&#34;520px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;不使用kv-cache-内部矩阵的运算过程&#34;&gt;不使用KV Cache 内部矩阵的运算过程
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409155844158.png&#34;
+	width=&#34;2298&#34;
+	height=&#34;1551&#34;
+	srcset=&#34;https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409155844158_hu2604319429260180841.png 480w, https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409155844158_hu12368846723205330597.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260409155844158&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;148&#34;
+		data-flex-basis=&#34;355px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用kv-cache-内部矩阵的运算过程&#34;&gt;使用KV Cache 内部矩阵的运算过程
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409160907786.png&#34;
+	width=&#34;2304&#34;
+	height=&#34;1672&#34;
+	srcset=&#34;https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409160907786_hu13817074643600023560.png 480w, https://LiangCode2019.github.io/p/kv_cache/index.assets/image-20260409160907786_hu18251861539764946200.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20260409160907786&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;137&#34;
+		data-flex-basis=&#34;330px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>LLM底层架构_Transformer原理</title>
+        <link>https://LiangCode2019.github.io/p/llm%E5%BA%95%E5%B1%82%E6%9E%B6%E6%9E%84_transformer%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Wed, 25 Mar 2026 21:44:19 +0800</pubDate>
+        
+        <guid>https://LiangCode2019.github.io/p/llm%E5%BA%95%E5%B1%82%E6%9E%B6%E6%9E%84_transformer%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;h2 id=&#34;前沿&#34;&gt;前沿
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Transformer 由Gooogle的研究团队提出，并在2017年发表了《Attention Is All You Need》。主要致力于在序列建模中提升并行性与长距离依赖建模能力，摆脱对循环和卷积的依赖。Transformer主要工作如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;结构&lt;/strong&gt;： 利用编码器和解码器的结构&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;三种注意力&lt;/strong&gt;：编码器多头注意力、交叉注意力、解码器多头注意力（含因果掩码）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;位置信息&lt;/strong&gt;：用位置编码赋予词向量序列信息&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;残差连接 + 层归一化 + 前向传播 (FFN)&lt;/strong&gt;：形成标准层块、稳定深层训练。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>LLM的训练原理</title>
         <link>https://LiangCode2019.github.io/p/llm%E7%9A%84%E8%AE%AD%E7%BB%83%E5%8E%9F%E7%90%86/</link>
         <pubDate>Sun, 22 Mar 2026 21:46:19 +0800</pubDate>
